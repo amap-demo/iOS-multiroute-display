@@ -1,0 +1,19 @@
+//
+//  SelectableTrafficOverlay.h
+//  MultiRoutePlan
+//
+//  Created by AutoNavi on 11/3/16.
+//  Copyright © 2016 AutoNavi. All rights reserved.
+//
+
+#import <MAMapKit/MAMapKit.h>
+
+@interface SelectableTrafficOverlay : MAMultiPolyline
+
+@property (nonatomic, assign) NSInteger routeID;
+
+@property (nonatomic, assign) BOOL selected;
+@property (nonatomic, assign) CGFloat polylineWidth;
+@property (nonatomic, strong) NSArray<UIColor *> *polylineStrokeColors;
+
+@end

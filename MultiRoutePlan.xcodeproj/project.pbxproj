@@ -1,0 +1,499 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A042CB11DCAE56400BB9641 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CB01DCAE56400BB9641 /* main.m */; };
+		3A042CB41DCAE56400BB9641 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CB31DCAE56400BB9641 /* AppDelegate.m */; };
+		3A042CBC1DCAE56400BB9641 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A042CBB1DCAE56400BB9641 /* Assets.xcassets */; };
+		3A042CBF1DCAE56400BB9641 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A042CBD1DCAE56400BB9641 /* LaunchScreen.storyboard */; };
+		3A042CDE1DCAE74E00BB9641 /* DriveNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CC91DCAE74E00BB9641 /* DriveNaviViewController.m */; };
+		3A042CDF1DCAE74E00BB9641 /* MoreMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CCC1DCAE74E00BB9641 /* MoreMenuView.m */; };
+		3A042CE21DCAE74E00BB9641 /* SpeechSynthesizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CD51DCAE74E00BB9641 /* SpeechSynthesizer.m */; };
+		3A042CE51DCAE74E00BB9641 /* MultiRoutePlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CDC1DCAE74E00BB9641 /* MultiRoutePlanViewController.m */; };
+		3A042CEC1DCAE84700BB9641 /* NaviPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CEB1DCAE84700BB9641 /* NaviPointAnnotation.m */; };
+		3A042CEF1DCAE87700BB9641 /* PreferenceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CEE1DCAE87700BB9641 /* PreferenceView.m */; };
+		3A042CF21DCB126C00BB9641 /* SelectableTrafficOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CF11DCB126C00BB9641 /* SelectableTrafficOverlay.m */; };
+		3A042CF81DCB2EC500BB9641 /* RouteInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CF71DCB2EC500BB9641 /* RouteInfoView.m */; };
+		3A042CFB1DCB37B000BB9641 /* BottomInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CFA1DCB37B000BB9641 /* BottomInfoView.m */; };
+		9684E7FB4920934FAFD44031 /* libPods-MultiRoutePlan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B916B9315EDD75A0303DF646 /* libPods-MultiRoutePlan.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3A042CAC1DCAE56400BB9641 /* MultiRoutePlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiRoutePlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A042CB01DCAE56400BB9641 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3A042CB21DCAE56400BB9641 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3A042CB31DCAE56400BB9641 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3A042CBB1DCAE56400BB9641 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A042CBE1DCAE56400BB9641 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3A042CC01DCAE56400BB9641 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A042CC81DCAE74E00BB9641 /* DriveNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveNaviViewController.h; sourceTree = "<group>"; };
+		3A042CC91DCAE74E00BB9641 /* DriveNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveNaviViewController.m; sourceTree = "<group>"; };
+		3A042CCB1DCAE74E00BB9641 /* MoreMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreMenuView.h; sourceTree = "<group>"; };
+		3A042CCC1DCAE74E00BB9641 /* MoreMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreMenuView.m; sourceTree = "<group>"; };
+		3A042CD41DCAE74E00BB9641 /* SpeechSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechSynthesizer.h; sourceTree = "<group>"; };
+		3A042CD51DCAE74E00BB9641 /* SpeechSynthesizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechSynthesizer.m; sourceTree = "<group>"; };
+		3A042CDB1DCAE74E00BB9641 /* MultiRoutePlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRoutePlanViewController.h; sourceTree = "<group>"; };
+		3A042CDC1DCAE74E00BB9641 /* MultiRoutePlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiRoutePlanViewController.m; sourceTree = "<group>"; };
+		3A042CE81DCAE76D00BB9641 /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
+		3A042CEA1DCAE84700BB9641 /* NaviPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviPointAnnotation.h; sourceTree = "<group>"; };
+		3A042CEB1DCAE84700BB9641 /* NaviPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviPointAnnotation.m; sourceTree = "<group>"; };
+		3A042CED1DCAE87700BB9641 /* PreferenceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferenceView.h; path = MultiRoutePlan/MultiRoutePlan/PreferenceView.h; sourceTree = SOURCE_ROOT; };
+		3A042CEE1DCAE87700BB9641 /* PreferenceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferenceView.m; path = MultiRoutePlan/MultiRoutePlan/PreferenceView.m; sourceTree = SOURCE_ROOT; };
+		3A042CF01DCB126C00BB9641 /* SelectableTrafficOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectableTrafficOverlay.h; sourceTree = "<group>"; };
+		3A042CF11DCB126C00BB9641 /* SelectableTrafficOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectableTrafficOverlay.m; sourceTree = "<group>"; };
+		3A042CF61DCB2EC500BB9641 /* RouteInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteInfoView.h; sourceTree = "<group>"; };
+		3A042CF71DCB2EC500BB9641 /* RouteInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteInfoView.m; sourceTree = "<group>"; };
+		3A042CF91DCB37B000BB9641 /* BottomInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomInfoView.h; sourceTree = "<group>"; };
+		3A042CFA1DCB37B000BB9641 /* BottomInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomInfoView.m; sourceTree = "<group>"; };
+		A7EA01C79F0048D84299177B /* Pods-MultiRoutePlan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiRoutePlan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MultiRoutePlan/Pods-MultiRoutePlan.debug.xcconfig"; sourceTree = "<group>"; };
+		B916B9315EDD75A0303DF646 /* libPods-MultiRoutePlan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MultiRoutePlan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8C5327C0B8608E80AC217CA /* Pods-MultiRoutePlan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiRoutePlan.release.xcconfig"; path = "Pods/Target Support Files/Pods-MultiRoutePlan/Pods-MultiRoutePlan.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A042CA91DCAE56400BB9641 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9684E7FB4920934FAFD44031 /* libPods-MultiRoutePlan.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		34C4F5288838827070623241 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B916B9315EDD75A0303DF646 /* libPods-MultiRoutePlan.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3A042CA31DCAE56300BB9641 = {
+			isa = PBXGroup;
+			children = (
+				3A042CAE1DCAE56400BB9641 /* MultiRoutePlan */,
+				3A042CAD1DCAE56400BB9641 /* Products */,
+				F44A495E603A9266BC6F8F86 /* Pods */,
+				34C4F5288838827070623241 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3A042CAD1DCAE56400BB9641 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A042CAC1DCAE56400BB9641 /* MultiRoutePlan.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A042CAE1DCAE56400BB9641 /* MultiRoutePlan */ = {
+			isa = PBXGroup;
+			children = (
+				3A042CB21DCAE56400BB9641 /* AppDelegate.h */,
+				3A042CB31DCAE56400BB9641 /* AppDelegate.m */,
+				3A042CDA1DCAE74E00BB9641 /* MultiRoutePlan */,
+				3A042CC61DCAE74E00BB9641 /* Common */,
+				3A042CE71DCAE76D00BB9641 /* Configuration */,
+				3A042CBB1DCAE56400BB9641 /* Assets.xcassets */,
+				3A042CBD1DCAE56400BB9641 /* LaunchScreen.storyboard */,
+				3A042CC01DCAE56400BB9641 /* Info.plist */,
+				3A042CAF1DCAE56400BB9641 /* Supporting Files */,
+			);
+			path = MultiRoutePlan;
+			sourceTree = "<group>";
+		};
+		3A042CAF1DCAE56400BB9641 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A042CB01DCAE56400BB9641 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A042CC61DCAE74E00BB9641 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3A042CE91DCAE84700BB9641 /* PointAnnotation */,
+				3A042CC71DCAE74E00BB9641 /* DriveNaviViewController */,
+				3A042CCA1DCAE74E00BB9641 /* MoreMenuView */,
+				3A042CD31DCAE74E00BB9641 /* SpeechSynthesizer */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		3A042CC71DCAE74E00BB9641 /* DriveNaviViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3A042CC81DCAE74E00BB9641 /* DriveNaviViewController.h */,
+				3A042CC91DCAE74E00BB9641 /* DriveNaviViewController.m */,
+			);
+			path = DriveNaviViewController;
+			sourceTree = "<group>";
+		};
+		3A042CCA1DCAE74E00BB9641 /* MoreMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				3A042CCB1DCAE74E00BB9641 /* MoreMenuView.h */,
+				3A042CCC1DCAE74E00BB9641 /* MoreMenuView.m */,
+			);
+			path = MoreMenuView;
+			sourceTree = "<group>";
+		};
+		3A042CD31DCAE74E00BB9641 /* SpeechSynthesizer */ = {
+			isa = PBXGroup;
+			children = (
+				3A042CD41DCAE74E00BB9641 /* SpeechSynthesizer.h */,
+				3A042CD51DCAE74E00BB9641 /* SpeechSynthesizer.m */,
+			);
+			path = SpeechSynthesizer;
+			sourceTree = "<group>";
+		};
+		3A042CDA1DCAE74E00BB9641 /* MultiRoutePlan */ = {
+			isa = PBXGroup;
+			children = (
+				3A042CDB1DCAE74E00BB9641 /* MultiRoutePlanViewController.h */,
+				3A042CDC1DCAE74E00BB9641 /* MultiRoutePlanViewController.m */,
+				3A042CF61DCB2EC500BB9641 /* RouteInfoView.h */,
+				3A042CF71DCB2EC500BB9641 /* RouteInfoView.m */,
+				3A042CF91DCB37B000BB9641 /* BottomInfoView.h */,
+				3A042CFA1DCB37B000BB9641 /* BottomInfoView.m */,
+				3A042CED1DCAE87700BB9641 /* PreferenceView.h */,
+				3A042CEE1DCAE87700BB9641 /* PreferenceView.m */,
+				3A042CF01DCB126C00BB9641 /* SelectableTrafficOverlay.h */,
+				3A042CF11DCB126C00BB9641 /* SelectableTrafficOverlay.m */,
+			);
+			path = MultiRoutePlan;
+			sourceTree = "<group>";
+		};
+		3A042CE71DCAE76D00BB9641 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				3A042CE81DCAE76D00BB9641 /* APIKey.h */,
+			);
+			name = Configuration;
+			path = MultiRoutePlan/Configuration;
+			sourceTree = SOURCE_ROOT;
+		};
+		3A042CE91DCAE84700BB9641 /* PointAnnotation */ = {
+			isa = PBXGroup;
+			children = (
+				3A042CEA1DCAE84700BB9641 /* NaviPointAnnotation.h */,
+				3A042CEB1DCAE84700BB9641 /* NaviPointAnnotation.m */,
+			);
+			path = PointAnnotation;
+			sourceTree = "<group>";
+		};
+		F44A495E603A9266BC6F8F86 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A7EA01C79F0048D84299177B /* Pods-MultiRoutePlan.debug.xcconfig */,
+				C8C5327C0B8608E80AC217CA /* Pods-MultiRoutePlan.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3A042CAB1DCAE56400BB9641 /* MultiRoutePlan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A042CC31DCAE56400BB9641 /* Build configuration list for PBXNativeTarget "MultiRoutePlan" */;
+			buildPhases = (
+				999114DE6EC2029708975F02 /* [CP] Check Pods Manifest.lock */,
+				3A042CA81DCAE56400BB9641 /* Sources */,
+				3A042CA91DCAE56400BB9641 /* Frameworks */,
+				3A042CAA1DCAE56400BB9641 /* Resources */,
+				7F69C7E3E6527F2BE24250AF /* [CP] Embed Pods Frameworks */,
+				8CF27B99440558C2110BC8D7 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MultiRoutePlan;
+			productName = MultiRoutePlan;
+			productReference = 3A042CAC1DCAE56400BB9641 /* MultiRoutePlan.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3A042CA41DCAE56300BB9641 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = AutoNavi;
+				TargetAttributes = {
+					3A042CAB1DCAE56400BB9641 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = YMJ372W38W;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 3A042CA71DCAE56300BB9641 /* Build configuration list for PBXProject "MultiRoutePlan" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A042CA31DCAE56300BB9641;
+			productRefGroup = 3A042CAD1DCAE56400BB9641 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3A042CAB1DCAE56400BB9641 /* MultiRoutePlan */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3A042CAA1DCAE56400BB9641 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A042CBF1DCAE56400BB9641 /* LaunchScreen.storyboard in Resources */,
+				3A042CBC1DCAE56400BB9641 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7F69C7E3E6527F2BE24250AF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MultiRoutePlan/Pods-MultiRoutePlan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8CF27B99440558C2110BC8D7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MultiRoutePlan/Pods-MultiRoutePlan-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		999114DE6EC2029708975F02 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A042CA81DCAE56400BB9641 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A042CDF1DCAE74E00BB9641 /* MoreMenuView.m in Sources */,
+				3A042CB41DCAE56400BB9641 /* AppDelegate.m in Sources */,
+				3A042CF81DCB2EC500BB9641 /* RouteInfoView.m in Sources */,
+				3A042CFB1DCB37B000BB9641 /* BottomInfoView.m in Sources */,
+				3A042CEC1DCAE84700BB9641 /* NaviPointAnnotation.m in Sources */,
+				3A042CEF1DCAE87700BB9641 /* PreferenceView.m in Sources */,
+				3A042CB11DCAE56400BB9641 /* main.m in Sources */,
+				3A042CF21DCB126C00BB9641 /* SelectableTrafficOverlay.m in Sources */,
+				3A042CE51DCAE74E00BB9641 /* MultiRoutePlanViewController.m in Sources */,
+				3A042CE21DCAE74E00BB9641 /* SpeechSynthesizer.m in Sources */,
+				3A042CDE1DCAE74E00BB9641 /* DriveNaviViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3A042CBD1DCAE56400BB9641 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A042CBE1DCAE56400BB9641 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3A042CC11DCAE56400BB9641 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3A042CC21DCAE56400BB9641 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3A042CC41DCAE56400BB9641 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7EA01C79F0048D84299177B /* Pods-MultiRoutePlan.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YMJ372W38W;
+				INFOPLIST_FILE = MultiRoutePlan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.autonavi.MultiRoutePlan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "87cd0391-16b0-4688-90bd-386a7bfa6ffc";
+				PROVISIONING_PROFILE_SPECIFIER = openPlatform_development;
+			};
+			name = Debug;
+		};
+		3A042CC51DCAE56400BB9641 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8C5327C0B8608E80AC217CA /* Pods-MultiRoutePlan.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = MultiRoutePlan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.autonavi.MultiRoutePlan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A042CA71DCAE56300BB9641 /* Build configuration list for PBXProject "MultiRoutePlan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A042CC11DCAE56400BB9641 /* Debug */,
+				3A042CC21DCAE56400BB9641 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A042CC31DCAE56400BB9641 /* Build configuration list for PBXNativeTarget "MultiRoutePlan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A042CC41DCAE56400BB9641 /* Debug */,
+				3A042CC51DCAE56400BB9641 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A042CA41DCAE56300BB9641 /* Project object */;
+}
