@@ -488,6 +488,10 @@
     self.bottomInfoView = [[BottomInfoView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 64 - kBottomInfoViewHeight, CGRectGetWidth(self.view.bounds), kBottomInfoViewHeight)];
     self.bottomInfoView.delegate = self;
     [self.view addSubview:self.bottomInfoView];
+    
+    RouteInfoViewModel *aNilModel = [[RouteInfoViewModel alloc] init];
+    aNilModel.routeTag = @"请在上方进行算路";
+    [self.bottomInfoView setAllRouteInfo:@[aNilModel]];
 }
 
 - (UIButton *)createToolButton
