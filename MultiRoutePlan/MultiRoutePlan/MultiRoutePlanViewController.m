@@ -240,6 +240,7 @@
 
 #pragma mark - Handle Navi Route Info
 
+/* 创建路线标签 */
 - (NSDictionary *)createRotueTagString
 {
     NSArray <NSNumber *> *allRouteIDs = [self.driveManager.naviRoutes allKeys];

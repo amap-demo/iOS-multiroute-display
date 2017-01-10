@@ -15,6 +15,7 @@
 
 ## 核心难点 ##
 
+`Objective-C`
 ```
 /* 根据路近况信息绘制带路况信息的polyline. */
 - (void)addRoutePolylineWithRouteID:(NSInteger)routeID
@@ -35,5 +36,32 @@
     ......
     
     [self.mapView addOverlay:polyline level:MAOverlayLevelAboveLabels];
+}
+```
+
+`Swift`
+```
+func addRoutePolylineWithRouteID(_ routeID: Int) {
+    //必须选中路线后，才可以通过driveManager获取实时交通路况
+    if !driveManager.selectNaviRoute(withRouteID: routeID) {
+        return
+    }
+    
+    guard let aRoute = driveManager.naviRoute else {
+        return
+    }
+    
+    //获取路线坐标串
+    guard let oriCoordinateArray = aRoute.routeCoordinates else {
+        return
+    }
+    guard let trafficStatus = driveManager.getTrafficStatuses(withStartPosition: 0, distance: Int32(aRoute.routeLength)) else {
+        return
+    }
+    
+    //创建带路况信息的polyline，具体代码见Demo
+    ......
+    
+    mapView.add(polyline, level: .aboveLabels)
 }
 ```

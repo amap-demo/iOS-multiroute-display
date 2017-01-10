@@ -20,7 +20,20 @@
 		3A042CF21DCB126C00BB9641 /* SelectableTrafficOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CF11DCB126C00BB9641 /* SelectableTrafficOverlay.m */; };
 		3A042CF81DCB2EC500BB9641 /* RouteInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CF71DCB2EC500BB9641 /* RouteInfoView.m */; };
 		3A042CFB1DCB37B000BB9641 /* BottomInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CFA1DCB37B000BB9641 /* BottomInfoView.m */; };
+		3A4334951E238B4E0091C030 /* DriveNaviViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4334901E238B4E0091C030 /* DriveNaviViewViewController.swift */; };
+		3A4334961E238B4E0091C030 /* NaviPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4334921E238B4E0091C030 /* NaviPointAnnotation.swift */; };
+		3A4334971E238B4E0091C030 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4334941E238B4E0091C030 /* SpeechSynthesizer.swift */; };
+		3A4334981E238B620091C030 /* MoreMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CCC1DCAE74E00BB9641 /* MoreMenuView.m */; };
+		3A4334991E2391D50091C030 /* RouteInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CF71DCB2EC500BB9641 /* RouteInfoView.m */; };
+		3A43349A1E2391D50091C030 /* BottomInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CFA1DCB37B000BB9641 /* BottomInfoView.m */; };
+		3A43349B1E2391D50091C030 /* PreferenceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CEE1DCAE87700BB9641 /* PreferenceView.m */; };
+		3A43349C1E2391D50091C030 /* SelectableTrafficOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A042CF11DCB126C00BB9641 /* SelectableTrafficOverlay.m */; };
+		3A43349F1E2392010091C030 /* MultiRoutePlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A43349E1E2392010091C030 /* MultiRoutePlanViewController.swift */; };
+		3A74E7D81E23777100BDC2D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A74E7D71E23777100BDC2D9 /* AppDelegate.swift */; };
+		3A74E7DF1E23777100BDC2D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A74E7DE1E23777100BDC2D9 /* Assets.xcassets */; };
+		3A74E7E21E23777100BDC2D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A74E7E01E23777100BDC2D9 /* LaunchScreen.storyboard */; };
 		9684E7FB4920934FAFD44031 /* libPods-MultiRoutePlan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B916B9315EDD75A0303DF646 /* libPods-MultiRoutePlan.a */; };
+		EAF9F8FDA72EF3A4E63AACCD /* libPods-MultiRoutePlan-swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BADE2737A4AC68ACFDEA72C6 /* libPods-MultiRoutePlan-swift.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,8 +63,21 @@
 		3A042CF71DCB2EC500BB9641 /* RouteInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteInfoView.m; sourceTree = "<group>"; };
 		3A042CF91DCB37B000BB9641 /* BottomInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomInfoView.h; sourceTree = "<group>"; };
 		3A042CFA1DCB37B000BB9641 /* BottomInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomInfoView.m; sourceTree = "<group>"; };
+		3A43348D1E2377CE0091C030 /* Swift-Bridge-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Swift-Bridge-Header.h"; sourceTree = "<group>"; };
+		3A4334901E238B4E0091C030 /* DriveNaviViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriveNaviViewViewController.swift; sourceTree = "<group>"; };
+		3A4334921E238B4E0091C030 /* NaviPointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NaviPointAnnotation.swift; sourceTree = "<group>"; };
+		3A4334941E238B4E0091C030 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
+		3A43349E1E2392010091C030 /* MultiRoutePlanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiRoutePlanViewController.swift; sourceTree = "<group>"; };
+		3A74E7D51E23777100BDC2D9 /* MultiRoutePlan-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MultiRoutePlan-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A74E7D71E23777100BDC2D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3A74E7DE1E23777100BDC2D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A74E7E11E23777100BDC2D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3A74E7E31E23777100BDC2D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A8C68A3FCCF6F31BB811293 /* Pods-MultiRoutePlan-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiRoutePlan-swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-MultiRoutePlan-swift/Pods-MultiRoutePlan-swift.release.xcconfig"; sourceTree = "<group>"; };
 		A7EA01C79F0048D84299177B /* Pods-MultiRoutePlan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiRoutePlan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MultiRoutePlan/Pods-MultiRoutePlan.debug.xcconfig"; sourceTree = "<group>"; };
+		B2EF5A1E2AE8B53E53BA3E5D /* Pods-MultiRoutePlan-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiRoutePlan-swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MultiRoutePlan-swift/Pods-MultiRoutePlan-swift.debug.xcconfig"; sourceTree = "<group>"; };
 		B916B9315EDD75A0303DF646 /* libPods-MultiRoutePlan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MultiRoutePlan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BADE2737A4AC68ACFDEA72C6 /* libPods-MultiRoutePlan-swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MultiRoutePlan-swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8C5327C0B8608E80AC217CA /* Pods-MultiRoutePlan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiRoutePlan.release.xcconfig"; path = "Pods/Target Support Files/Pods-MultiRoutePlan/Pods-MultiRoutePlan.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,6 +90,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3A74E7D21E23777100BDC2D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF9F8FDA72EF3A4E63AACCD /* libPods-MultiRoutePlan-swift.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -71,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				B916B9315EDD75A0303DF646 /* libPods-MultiRoutePlan.a */,
+				BADE2737A4AC68ACFDEA72C6 /* libPods-MultiRoutePlan-swift.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -79,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				3A042CAE1DCAE56400BB9641 /* MultiRoutePlan */,
+				3A74E7D61E23777100BDC2D9 /* MultiRoutePlan-swift */,
 				3A042CAD1DCAE56400BB9641 /* Products */,
 				F44A495E603A9266BC6F8F86 /* Pods */,
 				34C4F5288838827070623241 /* Frameworks */,
@@ -89,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				3A042CAC1DCAE56400BB9641 /* MultiRoutePlan.app */,
+				3A74E7D51E23777100BDC2D9 /* MultiRoutePlan-swift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,11 +227,61 @@
 			path = PointAnnotation;
 			sourceTree = "<group>";
 		};
+		3A43348E1E238B4E0091C030 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3A43348F1E238B4E0091C030 /* DriveNaviViewController */,
+				3A4334911E238B4E0091C030 /* PointAnnotation */,
+				3A4334931E238B4E0091C030 /* SpeechSynthesizer */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		3A43348F1E238B4E0091C030 /* DriveNaviViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3A4334901E238B4E0091C030 /* DriveNaviViewViewController.swift */,
+			);
+			path = DriveNaviViewController;
+			sourceTree = "<group>";
+		};
+		3A4334911E238B4E0091C030 /* PointAnnotation */ = {
+			isa = PBXGroup;
+			children = (
+				3A4334921E238B4E0091C030 /* NaviPointAnnotation.swift */,
+			);
+			path = PointAnnotation;
+			sourceTree = "<group>";
+		};
+		3A4334931E238B4E0091C030 /* SpeechSynthesizer */ = {
+			isa = PBXGroup;
+			children = (
+				3A4334941E238B4E0091C030 /* SpeechSynthesizer.swift */,
+			);
+			path = SpeechSynthesizer;
+			sourceTree = "<group>";
+		};
+		3A74E7D61E23777100BDC2D9 /* MultiRoutePlan-swift */ = {
+			isa = PBXGroup;
+			children = (
+				3A43348D1E2377CE0091C030 /* Swift-Bridge-Header.h */,
+				3A74E7D71E23777100BDC2D9 /* AppDelegate.swift */,
+				3A43349E1E2392010091C030 /* MultiRoutePlanViewController.swift */,
+				3A43348E1E238B4E0091C030 /* Common */,
+				3A74E7DE1E23777100BDC2D9 /* Assets.xcassets */,
+				3A74E7E01E23777100BDC2D9 /* LaunchScreen.storyboard */,
+				3A74E7E31E23777100BDC2D9 /* Info.plist */,
+			);
+			path = "MultiRoutePlan-swift";
+			sourceTree = "<group>";
+		};
 		F44A495E603A9266BC6F8F86 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				A7EA01C79F0048D84299177B /* Pods-MultiRoutePlan.debug.xcconfig */,
 				C8C5327C0B8608E80AC217CA /* Pods-MultiRoutePlan.release.xcconfig */,
+				B2EF5A1E2AE8B53E53BA3E5D /* Pods-MultiRoutePlan-swift.debug.xcconfig */,
+				4A8C68A3FCCF6F31BB811293 /* Pods-MultiRoutePlan-swift.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -222,17 +309,48 @@
 			productReference = 3A042CAC1DCAE56400BB9641 /* MultiRoutePlan.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3A74E7D41E23777100BDC2D9 /* MultiRoutePlan-swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A74E7E61E23777100BDC2D9 /* Build configuration list for PBXNativeTarget "MultiRoutePlan-swift" */;
+			buildPhases = (
+				34E66865B20590916802764E /* [CP] Check Pods Manifest.lock */,
+				3A74E7D11E23777100BDC2D9 /* Sources */,
+				3A74E7D21E23777100BDC2D9 /* Frameworks */,
+				3A74E7D31E23777100BDC2D9 /* Resources */,
+				6D373F9628782DB6F526008D /* [CP] Embed Pods Frameworks */,
+				D448F9FBB5403072A9019A57 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MultiRoutePlan-swift";
+			productName = "MultiRoutePlan-swift";
+			productReference = 3A74E7D51E23777100BDC2D9 /* MultiRoutePlan-swift.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		3A042CA41DCAE56300BB9641 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
-				ORGANIZATIONNAME = AutoNavi;
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = Amap;
 				TargetAttributes = {
 					3A042CAB1DCAE56400BB9641 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = YMJ372W38W;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+					3A74E7D41E23777100BDC2D9 = {
+						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = YMJ372W38W;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -257,6 +375,7 @@
 			projectRoot = "";
 			targets = (
 				3A042CAB1DCAE56400BB9641 /* MultiRoutePlan */,
+				3A74E7D41E23777100BDC2D9 /* MultiRoutePlan-swift */,
 			);
 		};
 /* End PBXProject section */
@@ -271,9 +390,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3A74E7D31E23777100BDC2D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A74E7E21E23777100BDC2D9 /* LaunchScreen.storyboard in Resources */,
+				3A74E7DF1E23777100BDC2D9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		34E66865B20590916802764E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6D373F9628782DB6F526008D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MultiRoutePlan-swift/Pods-MultiRoutePlan-swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7F69C7E3E6527F2BE24250AF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -319,6 +477,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		D448F9FBB5403072A9019A57 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MultiRoutePlan-swift/Pods-MultiRoutePlan-swift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -340,6 +513,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3A74E7D11E23777100BDC2D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A4334991E2391D50091C030 /* RouteInfoView.m in Sources */,
+				3A43349A1E2391D50091C030 /* BottomInfoView.m in Sources */,
+				3A43349B1E2391D50091C030 /* PreferenceView.m in Sources */,
+				3A43349F1E2392010091C030 /* MultiRoutePlanViewController.swift in Sources */,
+				3A43349C1E2391D50091C030 /* SelectableTrafficOverlay.m in Sources */,
+				3A4334981E238B620091C030 /* MoreMenuView.m in Sources */,
+				3A4334951E238B4E0091C030 /* DriveNaviViewViewController.swift in Sources */,
+				3A74E7D81E23777100BDC2D9 /* AppDelegate.swift in Sources */,
+				3A4334961E238B4E0091C030 /* NaviPointAnnotation.swift in Sources */,
+				3A4334971E238B4E0091C030 /* SpeechSynthesizer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -347,6 +537,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				3A042CBE1DCAE56400BB9641 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3A74E7E01E23777100BDC2D9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A74E7E11E23777100BDC2D9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -372,6 +570,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -419,6 +618,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -438,6 +638,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -475,6 +676,46 @@
 			};
 			name = Release;
 		};
+		3A74E7E41E23777100BDC2D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2EF5A1E2AE8B53E53BA3E5D /* Pods-MultiRoutePlan-swift.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YMJ372W38W;
+				INFOPLIST_FILE = "MultiRoutePlan-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.autonavi.MultiRoutePlan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "249676f7-6dfc-4adf-ab62-14190fd9ac21";
+				PROVISIONING_PROFILE_SPECIFIER = openPlatform_development;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "./MultiRoutePlan-swift/Swift-Bridge-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		3A74E7E51E23777100BDC2D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A8C68A3FCCF6F31BB811293 /* Pods-MultiRoutePlan-swift.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = YMJ372W38W;
+				INFOPLIST_FILE = "MultiRoutePlan-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.autonavi.MultiRoutePlan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a892512d-fe94-4702-b716-0b66880b936d";
+				PROVISIONING_PROFILE_SPECIFIER = openPlatformInhouse;
+				SWIFT_OBJC_BRIDGING_HEADER = "./MultiRoutePlan-swift/Swift-Bridge-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -492,6 +733,15 @@
 			buildConfigurations = (
 				3A042CC41DCAE56400BB9641 /* Debug */,
 				3A042CC51DCAE56400BB9641 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A74E7E61E23777100BDC2D9 /* Build configuration list for PBXNativeTarget "MultiRoutePlan-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A74E7E41E23777100BDC2D9 /* Debug */,
+				3A74E7E51E23777100BDC2D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
