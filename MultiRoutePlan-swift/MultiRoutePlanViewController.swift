@@ -124,8 +124,6 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
             
             allInfoModels.append(aInfoModel)
         }
-        
-        mapView.showAnnotations(mapView.annotations, animated: false)
         bottomInfoView.allRouteInfo = allInfoModels
         
         //默认选择第一条路线

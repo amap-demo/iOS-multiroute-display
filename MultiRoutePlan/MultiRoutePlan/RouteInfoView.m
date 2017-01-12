@@ -70,6 +70,7 @@
     [self.coverButton setBackgroundColor:[UIColor clearColor]];
     [self.coverButton setFrame:self.bounds];
     [self.coverButton addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.coverButton setAccessibilityIdentifier:@"RouteInfoViewButton"];
     
     [self addSubview:self.tipView];
     [self addSubview:self.tagLabel];

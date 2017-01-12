@@ -67,6 +67,9 @@
     
     _allRouteInfo = allRouteInfo;
     
+    [self.allInfoViews enumerateObjectsUsingBlock:^(RouteInfoView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
     [self.allInfoViews removeAllObjects];
     
     int count = (int)_allRouteInfo.count;

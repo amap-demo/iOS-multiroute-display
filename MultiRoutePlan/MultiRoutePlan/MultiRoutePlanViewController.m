@@ -166,8 +166,6 @@
         
         [allInfoModels addObject:aInfoModel];
     }
-    
-    [self.mapView showAnnotations:self.mapView.annotations animated:NO];
     [self.bottomInfoView setAllRouteInfo:allInfoModels];
     
     //默认选择第一条路线
