@@ -37,10 +37,61 @@
     
     [self.mapView addOverlay:polyline level:MAOverlayLevelAboveLabels];
 }
+
+/* 选择对应的polyline，改变polyline的颜色. */
+- (void)selecteOverlayWithRouteID:(NSInteger)routeID
+{
+    [self.mapView.overlays enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id<MAOverlay> overlay, NSUInteger idx, BOOL *stop)
+     {
+         if ([overlay isKindOfClass:[SelectableTrafficOverlay class]])
+         {
+             SelectableTrafficOverlay *selectableOverlay = overlay;
+             
+             /* 获取overlay对应的renderer. */
+             MAMultiColoredPolylineRenderer * overlayRenderer = (MAMultiColoredPolylineRenderer *)[self.mapView rendererForOverlay:selectableOverlay];
+             
+             if (selectableOverlay.routeID == routeID)
+             {
+                 /* 设置选中状态. */
+                 selectableOverlay.selected = YES;
+                 
+                 /* 修改renderer选中颜色. */
+                 NSMutableArray *strokeColors = [[NSMutableArray alloc] init];
+                 for (UIColor *aColor in selectableOverlay.polylineStrokeColors)
+                 {
+                     [strokeColors addObject:[aColor colorWithAlphaComponent:1]];
+                 }
+                 selectableOverlay.polylineStrokeColors = strokeColors;
+                 overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors;
+                 
+                 /* 修改overlay覆盖的顺序. */
+                 [self.mapView exchangeOverlayAtIndex:idx withOverlayAtIndex:self.mapView.overlays.count - 1];
+                 [self.mapView showOverlays:@[overlay] animated:YES];
+             }
+             else
+             {
+                 /* 设置选中状态. */
+                 selectableOverlay.selected = NO;
+                 
+                 /* 修改renderer选中颜色. */
+                 NSMutableArray *strokeColors = [[NSMutableArray alloc] init];
+                 for (UIColor *aColor in selectableOverlay.polylineStrokeColors)
+                 {
+                     [strokeColors addObject:[aColor colorWithAlphaComponent:0.25]];
+                 }
+                 selectableOverlay.polylineStrokeColors = strokeColors;
+                 overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors;
+             }
+             
+             [overlayRenderer glRender];
+         }
+     }];
+}
 ```
 
 `Swift`
 ```
+/* 根据路近况信息绘制带路况信息的polyline. */
 func addRoutePolylineWithRouteID(_ routeID: Int) {
     //必须选中路线后，才可以通过driveManager获取实时交通路况
     if !driveManager.selectNaviRoute(withRouteID: routeID) {
@@ -63,5 +114,53 @@ func addRoutePolylineWithRouteID(_ routeID: Int) {
     ......
     
     mapView.add(polyline, level: .aboveLabels)
+}
+
+/* 选择对应的polyline，改变polyline的颜色. */
+func selecteOverlayWithRouteID(routeID: Int) {
+    guard let allOverlays = mapView.overlays else {
+        return
+    }
+    
+    for (index, aOverlay) in allOverlays.enumerated() {
+        
+        if let selectableOverlay = aOverlay as? SelectableTrafficOverlay {
+            
+            /* 获取overlay对应的renderer. */
+            let overlayRenderer = mapView.renderer(for: selectableOverlay) as! MAMultiColoredPolylineRenderer
+            
+            if selectableOverlay.routeID == routeID {
+                
+                /* 设置选中状态. */
+                selectableOverlay.selected = true
+                
+                /* 修改renderer选中颜色. */
+                var strokeColors = Array<UIColor>()
+                for aColor in selectableOverlay.polylineStrokeColors {
+                    strokeColors.append(aColor.withAlphaComponent(1.0))
+                }
+                selectableOverlay.polylineStrokeColors = strokeColors
+                overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors
+                
+                /* 修改overlay覆盖的顺序. */
+                mapView.exchangeOverlay(at: UInt(index), withOverlayAt: UInt(mapView.overlays.count - 1))
+                mapView.showOverlays([aOverlay], animated: true)
+            }
+            else {
+                /* 设置选中状态. */
+                selectableOverlay.selected = false
+                
+                /* 修改renderer选中颜色. */
+                var strokeColors = Array<UIColor>()
+                for aColor in selectableOverlay.polylineStrokeColors {
+                    strokeColors.append(aColor.withAlphaComponent(0.25))
+                }
+                selectableOverlay.polylineStrokeColors = strokeColors
+                overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors
+            }
+            
+            overlayRenderer.glRender()
+        }
+    }
 }
 ```
