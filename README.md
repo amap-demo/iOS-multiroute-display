@@ -20,6 +20,16 @@
 /* 根据路近况信息绘制带路况信息的polyline. */
 - (void)addRoutePolylineWithRouteID:(NSInteger)routeID
 {
+    //用不同颜色表示不同的路况
+    //[self addRoutePolylineUseStrokeColorsWithRouteID:routeID];
+    
+    //用不同纹理表示不同的路况
+    [self addRoutePolylineUseTextureImageWithRouteID:routeID];
+}
+
+/* 用不同纹理表示不同的路况 */
+- (void)addRoutePolylineUseTextureImageWithRouteID:(NSInteger)routeID
+{
     //必须选中路线后，才可以通过driveManager获取实时交通路况
     if (![self.driveManager selectNaviRouteWithRouteID:routeID])
     {
@@ -48,42 +58,72 @@
              SelectableTrafficOverlay *selectableOverlay = overlay;
              
              /* 获取overlay对应的renderer. */
-             MAMultiColoredPolylineRenderer * overlayRenderer = (MAMultiColoredPolylineRenderer *)[self.mapView rendererForOverlay:selectableOverlay];
+             MAPolylineRenderer *polylineRenderer = (MAPolylineRenderer *)[self.mapView rendererForOverlay:selectableOverlay];
              
-             if (selectableOverlay.routeID == routeID)
+             if ([polylineRenderer isKindOfClass:[MAMultiColoredPolylineRenderer class]])
              {
-                 /* 设置选中状态. */
-                 selectableOverlay.selected = YES;
+                 MAMultiColoredPolylineRenderer *overlayRenderer = (MAMultiColoredPolylineRenderer *)polylineRenderer;
                  
-                 /* 修改renderer选中颜色. */
-                 NSMutableArray *strokeColors = [[NSMutableArray alloc] init];
-                 for (UIColor *aColor in selectableOverlay.polylineStrokeColors)
+                 if (selectableOverlay.routeID == routeID)
                  {
-                     [strokeColors addObject:[aColor colorWithAlphaComponent:1]];
+                     /* 设置选中状态. */
+                     selectableOverlay.selected = YES;
+                     
+                     /* 修改renderer选中颜色. */
+                     NSMutableArray *strokeColors = [[NSMutableArray alloc] init];
+                     for (UIColor *aColor in selectableOverlay.polylineStrokeColors)
+                     {
+                         [strokeColors addObject:[aColor colorWithAlphaComponent:1]];
+                     }
+                     selectableOverlay.polylineStrokeColors = strokeColors;
+                     overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors;
+                     
+                     /* 修改overlay覆盖的顺序. */
+                     [self.mapView exchangeOverlayAtIndex:idx withOverlayAtIndex:self.mapView.overlays.count - 1];
+                     [self.mapView showOverlays:@[overlay] animated:YES];
                  }
-                 selectableOverlay.polylineStrokeColors = strokeColors;
-                 overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors;
-                 
-                 /* 修改overlay覆盖的顺序. */
-                 [self.mapView exchangeOverlayAtIndex:idx withOverlayAtIndex:self.mapView.overlays.count - 1];
-                 [self.mapView showOverlays:@[overlay] animated:YES];
+                 else
+                 {
+                     /* 设置选中状态. */
+                     selectableOverlay.selected = NO;
+                     
+                     /* 修改renderer选中颜色. */
+                     NSMutableArray *strokeColors = [[NSMutableArray alloc] init];
+                     for (UIColor *aColor in selectableOverlay.polylineStrokeColors)
+                     {
+                         [strokeColors addObject:[aColor colorWithAlphaComponent:0.25]];
+                     }
+                     selectableOverlay.polylineStrokeColors = strokeColors;
+                     overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors;
+                 }
              }
-             else
+             else if ([polylineRenderer isKindOfClass:[MAMultiTexturePolylineRenderer class]])
              {
-                 /* 设置选中状态. */
-                 selectableOverlay.selected = NO;
+                 MAMultiTexturePolylineRenderer *overlayRenderer = (MAMultiTexturePolylineRenderer *)polylineRenderer;
                  
-                 /* 修改renderer选中颜色. */
-                 NSMutableArray *strokeColors = [[NSMutableArray alloc] init];
-                 for (UIColor *aColor in selectableOverlay.polylineStrokeColors)
+                 if (selectableOverlay.routeID == routeID)
                  {
-                     [strokeColors addObject:[aColor colorWithAlphaComponent:0.25]];
+                     /* 设置选中状态. */
+                     selectableOverlay.selected = YES;
+                     
+                     /* 修改renderer选中颜色. */
+                     [overlayRenderer loadStrokeTextureImages:selectableOverlay.polylineTextureImages];
+                     
+                     /* 修改overlay覆盖的顺序. */
+                     [self.mapView exchangeOverlayAtIndex:idx withOverlayAtIndex:self.mapView.overlays.count - 1];
+                     [self.mapView showOverlays:@[overlay] animated:YES];
                  }
-                 selectableOverlay.polylineStrokeColors = strokeColors;
-                 overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors;
+                 else
+                 {
+                     /* 设置选中状态. */
+                     selectableOverlay.selected = NO;
+                     
+                     /* 修改renderer选中颜色. */
+                     [overlayRenderer loadStrokeTextureImages:@[[UIImage imageNamed:@"custtexture_gray"]]];
+                 }
              }
              
-             [overlayRenderer glRender];
+             [polylineRenderer glRender];
          }
      }];
 }
@@ -93,6 +133,16 @@
 ```
 /* 根据路近况信息绘制带路况信息的polyline. */
 func addRoutePolylineWithRouteID(_ routeID: Int) {
+    
+    //用不同颜色表示不同的路况
+    //addRoutePolylineUseStrokeColorsWithRouteID(routeID)
+    
+    //用不同纹理表示不同的路况
+    addRoutePolylineUseTextureImagesWithRouteID(routeID)
+}
+
+/* 用不同纹理表示不同的路况 */
+func addRoutePolylineUseTextureImagesWithRouteID(_ routeID: Int) {
     //必须选中路线后，才可以通过driveManager获取实时交通路况
     if !driveManager.selectNaviRoute(withRouteID: routeID) {
         return
@@ -127,39 +177,65 @@ func selecteOverlayWithRouteID(routeID: Int) {
         if let selectableOverlay = aOverlay as? SelectableTrafficOverlay {
             
             /* 获取overlay对应的renderer. */
-            let overlayRenderer = mapView.renderer(for: selectableOverlay) as! MAMultiColoredPolylineRenderer
+            let polylineRenderer = mapView.renderer(for: selectableOverlay) as! MAPolylineRenderer
             
-            if selectableOverlay.routeID == routeID {
+            if let overlayRenderer = polylineRenderer as? MAMultiColoredPolylineRenderer {
                 
-                /* 设置选中状态. */
-                selectableOverlay.selected = true
-                
-                /* 修改renderer选中颜色. */
-                var strokeColors = Array<UIColor>()
-                for aColor in selectableOverlay.polylineStrokeColors {
-                    strokeColors.append(aColor.withAlphaComponent(1.0))
+                if selectableOverlay.routeID == routeID {
+                    
+                    /* 设置选中状态. */
+                    selectableOverlay.selected = true
+                    
+                    /* 修改renderer选中颜色. */
+                    var strokeColors = Array<UIColor>()
+                    for aColor in selectableOverlay.polylineStrokeColors {
+                        strokeColors.append(aColor.withAlphaComponent(1.0))
+                    }
+                    selectableOverlay.polylineStrokeColors = strokeColors
+                    overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors
+                    
+                    /* 修改overlay覆盖的顺序. */
+                    mapView.exchangeOverlay(at: UInt(index), withOverlayAt: UInt(mapView.overlays.count - 1))
+                    mapView.showOverlays([aOverlay], animated: true)
                 }
-                selectableOverlay.polylineStrokeColors = strokeColors
-                overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors
-                
-                /* 修改overlay覆盖的顺序. */
-                mapView.exchangeOverlay(at: UInt(index), withOverlayAt: UInt(mapView.overlays.count - 1))
-                mapView.showOverlays([aOverlay], animated: true)
+                else {
+                    /* 设置选中状态. */
+                    selectableOverlay.selected = false
+                    
+                    /* 修改renderer选中颜色. */
+                    var strokeColors = Array<UIColor>()
+                    for aColor in selectableOverlay.polylineStrokeColors {
+                        strokeColors.append(aColor.withAlphaComponent(0.25))
+                    }
+                    selectableOverlay.polylineStrokeColors = strokeColors
+                    overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors
+                }
             }
-            else {
-                /* 设置选中状态. */
-                selectableOverlay.selected = false
+            else if let overlayRenderer = polylineRenderer as? MAMultiTexturePolylineRenderer {
                 
-                /* 修改renderer选中颜色. */
-                var strokeColors = Array<UIColor>()
-                for aColor in selectableOverlay.polylineStrokeColors {
-                    strokeColors.append(aColor.withAlphaComponent(0.25))
+                if selectableOverlay.routeID == routeID {
+                    
+                    /* 设置选中状态. */
+                    selectableOverlay.selected = true
+                    
+                    /* 修改renderer选中颜色. */
+                    overlayRenderer.loadStrokeTextureImages(selectableOverlay.polylineTextureImages)
+                    
+                    /* 修改overlay覆盖的顺序. */
+                    mapView.exchangeOverlay(at: UInt(index), withOverlayAt: UInt(mapView.overlays.count - 1))
+                    mapView.showOverlays([aOverlay], animated: true)
                 }
-                selectableOverlay.polylineStrokeColors = strokeColors
-                overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors
+                else {
+                    /* 设置选中状态. */
+                    selectableOverlay.selected = false
+                    
+                    /* 修改renderer选中颜色. */
+                    let image = UIImage(named: "custtexture_gray")!
+                    overlayRenderer.loadStrokeTextureImages([image])
+                }
             }
             
-            overlayRenderer.glRender()
+            polylineRenderer.glRender()
         }
     }
 }
