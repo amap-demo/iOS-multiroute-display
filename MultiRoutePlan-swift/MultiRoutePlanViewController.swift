@@ -152,39 +152,65 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
             if let selectableOverlay = aOverlay as? SelectableTrafficOverlay {
                 
                 /* 获取overlay对应的renderer. */
-                let overlayRenderer = mapView.renderer(for: selectableOverlay) as! MAMultiColoredPolylineRenderer
+                let polylineRenderer = mapView.renderer(for: selectableOverlay) as! MAPolylineRenderer
                 
-                if selectableOverlay.routeID == routeID {
+                if let overlayRenderer = polylineRenderer as? MAMultiColoredPolylineRenderer {
                     
-                    /* 设置选中状态. */
-                    selectableOverlay.selected = true
-                    
-                    /* 修改renderer选中颜色. */
-                    var strokeColors = Array<UIColor>()
-                    for aColor in selectableOverlay.polylineStrokeColors {
-                        strokeColors.append(aColor.withAlphaComponent(1.0))
+                    if selectableOverlay.routeID == routeID {
+                        
+                        /* 设置选中状态. */
+                        selectableOverlay.selected = true
+                        
+                        /* 修改renderer选中颜色. */
+                        var strokeColors = Array<UIColor>()
+                        for aColor in selectableOverlay.polylineStrokeColors {
+                            strokeColors.append(aColor.withAlphaComponent(1.0))
+                        }
+                        selectableOverlay.polylineStrokeColors = strokeColors
+                        overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors
+                        
+                        /* 修改overlay覆盖的顺序. */
+                        mapView.exchangeOverlay(at: UInt(index), withOverlayAt: UInt(mapView.overlays.count - 1))
+                        mapView.showOverlays([aOverlay], animated: true)
                     }
-                    selectableOverlay.polylineStrokeColors = strokeColors
-                    overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors
-                    
-                    /* 修改overlay覆盖的顺序. */
-                    mapView.exchangeOverlay(at: UInt(index), withOverlayAt: UInt(mapView.overlays.count - 1))
-                    mapView.showOverlays([aOverlay], animated: true)
+                    else {
+                        /* 设置选中状态. */
+                        selectableOverlay.selected = false
+                        
+                        /* 修改renderer选中颜色. */
+                        var strokeColors = Array<UIColor>()
+                        for aColor in selectableOverlay.polylineStrokeColors {
+                            strokeColors.append(aColor.withAlphaComponent(0.25))
+                        }
+                        selectableOverlay.polylineStrokeColors = strokeColors
+                        overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors
+                    }
                 }
-                else {
-                    /* 设置选中状态. */
-                    selectableOverlay.selected = false
+                else if let overlayRenderer = polylineRenderer as? MAMultiTexturePolylineRenderer {
                     
-                    /* 修改renderer选中颜色. */
-                    var strokeColors = Array<UIColor>()
-                    for aColor in selectableOverlay.polylineStrokeColors {
-                        strokeColors.append(aColor.withAlphaComponent(0.25))
+                    if selectableOverlay.routeID == routeID {
+                        
+                        /* 设置选中状态. */
+                        selectableOverlay.selected = true
+                        
+                        /* 修改renderer选中颜色. */
+                        overlayRenderer.loadStrokeTextureImages(selectableOverlay.polylineTextureImages)
+                        
+                        /* 修改overlay覆盖的顺序. */
+                        mapView.exchangeOverlay(at: UInt(index), withOverlayAt: UInt(mapView.overlays.count - 1))
+                        mapView.showOverlays([aOverlay], animated: true)
                     }
-                    selectableOverlay.polylineStrokeColors = strokeColors
-                    overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors
+                    else {
+                        /* 设置选中状态. */
+                        selectableOverlay.selected = false
+                        
+                        /* 修改renderer选中颜色. */
+                        let image = UIImage(named: "custtexture_gray")!
+                        overlayRenderer.loadStrokeTextureImages([image])
+                    }
                 }
                 
-                overlayRenderer.glRender()
+                polylineRenderer.glRender()
             }
         }
     }
@@ -303,7 +329,147 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
         }
     }
     
+    func defaultTextureImageForStatus(_ status: AMapNaviRouteStatus) -> UIImage {
+        var imageName = "custtexture_no"
+        switch status {
+        case .smooth:
+            imageName = "custtexture_green"
+        case .slow:
+            imageName = "custtexture_slow"
+        case .jam:
+            imageName = "custtexture_bad"
+        case .seriousJam:
+            imageName = "custtexture_serious"
+        default:
+            imageName = "custtexture_no"
+        }
+        return UIImage(named: imageName)!
+    }
+    
     func addRoutePolylineWithRouteID(_ routeID: Int) {
+        
+        //用不同颜色表示不同的路况
+//        addRoutePolylineUseStrokeColorsWithRouteID(routeID)
+        
+        //用不同纹理表示不同的路况
+        addRoutePolylineUseTextureImagesWithRouteID(routeID)
+    }
+    
+    func addRoutePolylineUseTextureImagesWithRouteID(_ routeID: Int) {
+        //必须选中路线后，才可以通过driveManager获取实时交通路况
+        if !driveManager.selectNaviRoute(withRouteID: routeID) {
+            return
+        }
+        
+        guard let aRoute = driveManager.naviRoute else {
+            return
+        }
+        
+        //获取路线坐标串
+        guard let oriCoordinateArray = aRoute.routeCoordinates else {
+            return
+        }
+        //获取路径的交通状况信息
+        guard let trafficStatus = driveManager.getTrafficStatuses(withStartPosition: 0, distance: Int32(aRoute.routeLength)) else {
+            return
+        }
+        
+        var resultCoords = Array<AMapNaviPoint>()
+        var coordIndexes = Array<NSNumber>()
+        var textureImages = Array<UIImage>()
+        resultCoords.append(oriCoordinateArray[0])
+        
+        //依次计算每个路况的长度对应的polyline点的index
+        var i = 0
+        var sumLength = 0
+        var statusesIndex = 0
+        var curTrafficLength = (trafficStatus.first?.length)!
+        
+        for index in 1..<(oriCoordinateArray.count-1) {
+            i = index
+            
+            let segDis = Int(calcDistanceBetween(oriCoordinateArray[i-1], and: oriCoordinateArray[i]))
+            
+            //两点间插入路况改变的点
+            if sumLength + segDis >= curTrafficLength {
+                if sumLength + segDis == curTrafficLength {
+                    resultCoords.append(oriCoordinateArray[i])
+                    coordIndexes.append(NSNumber(integerLiteral:(Int(resultCoords.count) - 1)))
+                }
+                else {
+                    let rate = segDis == 0 ? 0 : (curTrafficLength - sumLength) / segDis
+                    let extrnPoint = calcPointWith(startPoint: oriCoordinateArray[i-1], endPoint: oriCoordinateArray[i], rate: Double(rate))
+                    
+                    if extrnPoint != nil {
+                        resultCoords.append(extrnPoint!)
+                        coordIndexes.append(NSNumber(integerLiteral:(Int(resultCoords.count) - 1)))
+                        resultCoords.append(oriCoordinateArray[i])
+                    }
+                    else {
+                        resultCoords.append(oriCoordinateArray[i])
+                        coordIndexes.append(NSNumber(integerLiteral:(Int(resultCoords.count) - 1)))
+                    }
+                }
+                
+                //添加对应的strokeColors
+                textureImages.append(defaultTextureImageForStatus(trafficStatus[statusesIndex].status))
+                
+                sumLength = sumLength + segDis - curTrafficLength
+                
+                statusesIndex += 1
+                if statusesIndex >= trafficStatus.count {
+                    break
+                }
+                curTrafficLength = trafficStatus[statusesIndex].length
+            }
+            else {
+                resultCoords.append(oriCoordinateArray[i])
+                
+                sumLength += segDis
+            }
+        }
+        i += 1
+        
+        //将最后一个点对齐到路径终点
+        if i < oriCoordinateArray.count {
+            while i < oriCoordinateArray.count {
+                resultCoords.append(oriCoordinateArray[i])
+                i += 1
+            }
+            
+            coordIndexes.removeLast()
+            coordIndexes.append(NSNumber(integerLiteral:(Int(resultCoords.count) - 1)))
+        }
+        else {
+            while Int(coordIndexes.count)-1 >= Int(trafficStatus.count) {
+                coordIndexes.removeLast()
+                textureImages.removeLast()
+            }
+            
+            coordIndexes.append(NSNumber(integerLiteral:(Int(resultCoords.count) - 1)))
+            //需要修改textureImages的最后一个与trafficStatus最后一个一致
+            textureImages.append(defaultTextureImageForStatus(trafficStatus.last!.status))
+        }
+        
+        //添加Polyline
+        var coordinates = Array<CLLocationCoordinate2D>()
+        for aCoordinate in resultCoords {
+            coordinates.append(CLLocationCoordinate2DMake(CLLocationDegrees(aCoordinate.latitude), CLLocationDegrees(aCoordinate.longitude)))
+        }
+        
+        guard let polyline = SelectableTrafficOverlay(coordinates: &coordinates, count: UInt(coordinates.count), drawStyleIndexes: coordIndexes) else {
+            return
+        }
+        
+        polyline.routeID = routeID
+        polyline.selected = false
+        polyline.polylineWidth = 20
+        polyline.polylineTextureImages = textureImages
+        
+        mapView.add(polyline, level: .aboveLabels)
+    }
+    
+    func addRoutePolylineUseStrokeColorsWithRouteID(_ routeID: Int) {
         //必须选中路线后，才可以通过driveManager获取实时交通路况
         if !driveManager.selectNaviRoute(withRouteID: routeID) {
             return
@@ -576,6 +742,18 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
                 polylineRenderer?.strokeColors = routeOverlay.polylineStrokeColors
                 polylineRenderer?.isGradient = false
                 polylineRenderer?.fillColor = UIColor.red
+                
+                return polylineRenderer
+            }
+            else if routeOverlay.polylineTextureImages != nil && routeOverlay.polylineTextureImages.count > 0 {
+                let polylineRenderer = MAMultiTexturePolylineRenderer(multiPolyline: routeOverlay)
+                
+                polylineRenderer?.lineWidth = routeOverlay.polylineWidth
+                polylineRenderer?.lineJoinType = kMALineJoinRound
+                
+                if (polylineRenderer?.loadStrokeTextureImages(routeOverlay.polylineTextureImages))! {
+//                    NSLog("Load Overlay Texture Images Failed!")
+                }
                 
                 return polylineRenderer
             }

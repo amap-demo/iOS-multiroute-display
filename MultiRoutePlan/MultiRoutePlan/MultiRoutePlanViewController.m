@@ -196,42 +196,72 @@
              SelectableTrafficOverlay *selectableOverlay = overlay;
              
              /* 获取overlay对应的renderer. */
-             MAMultiColoredPolylineRenderer * overlayRenderer = (MAMultiColoredPolylineRenderer *)[self.mapView rendererForOverlay:selectableOverlay];
+             MAPolylineRenderer *polylineRenderer = (MAPolylineRenderer *)[self.mapView rendererForOverlay:selectableOverlay];
              
-             if (selectableOverlay.routeID == routeID)
+             if ([polylineRenderer isKindOfClass:[MAMultiColoredPolylineRenderer class]])
              {
-                 /* 设置选中状态. */
-                 selectableOverlay.selected = YES;
+                 MAMultiColoredPolylineRenderer *overlayRenderer = (MAMultiColoredPolylineRenderer *)polylineRenderer;
                  
-                 /* 修改renderer选中颜色. */
-                 NSMutableArray *strokeColors = [[NSMutableArray alloc] init];
-                 for (UIColor *aColor in selectableOverlay.polylineStrokeColors)
+                 if (selectableOverlay.routeID == routeID)
                  {
-                     [strokeColors addObject:[aColor colorWithAlphaComponent:1]];
+                     /* 设置选中状态. */
+                     selectableOverlay.selected = YES;
+                     
+                     /* 修改renderer选中颜色. */
+                     NSMutableArray *strokeColors = [[NSMutableArray alloc] init];
+                     for (UIColor *aColor in selectableOverlay.polylineStrokeColors)
+                     {
+                         [strokeColors addObject:[aColor colorWithAlphaComponent:1]];
+                     }
+                     selectableOverlay.polylineStrokeColors = strokeColors;
+                     overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors;
+                     
+                     /* 修改overlay覆盖的顺序. */
+                     [self.mapView exchangeOverlayAtIndex:idx withOverlayAtIndex:self.mapView.overlays.count - 1];
+                     [self.mapView showOverlays:@[overlay] animated:YES];
                  }
-                 selectableOverlay.polylineStrokeColors = strokeColors;
-                 overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors;
-                 
-                 /* 修改overlay覆盖的顺序. */
-                 [self.mapView exchangeOverlayAtIndex:idx withOverlayAtIndex:self.mapView.overlays.count - 1];
-                 [self.mapView showOverlays:@[overlay] animated:YES];
+                 else
+                 {
+                     /* 设置选中状态. */
+                     selectableOverlay.selected = NO;
+                     
+                     /* 修改renderer选中颜色. */
+                     NSMutableArray *strokeColors = [[NSMutableArray alloc] init];
+                     for (UIColor *aColor in selectableOverlay.polylineStrokeColors)
+                     {
+                         [strokeColors addObject:[aColor colorWithAlphaComponent:0.25]];
+                     }
+                     selectableOverlay.polylineStrokeColors = strokeColors;
+                     overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors;
+                 }
              }
-             else
+             else if ([polylineRenderer isKindOfClass:[MAMultiTexturePolylineRenderer class]])
              {
-                 /* 设置选中状态. */
-                 selectableOverlay.selected = NO;
+                 MAMultiTexturePolylineRenderer *overlayRenderer = (MAMultiTexturePolylineRenderer *)polylineRenderer;
                  
-                 /* 修改renderer选中颜色. */
-                 NSMutableArray *strokeColors = [[NSMutableArray alloc] init];
-                 for (UIColor *aColor in selectableOverlay.polylineStrokeColors)
+                 if (selectableOverlay.routeID == routeID)
                  {
-                     [strokeColors addObject:[aColor colorWithAlphaComponent:0.25]];
+                     /* 设置选中状态. */
+                     selectableOverlay.selected = YES;
+                     
+                     /* 修改renderer选中颜色. */
+                     [overlayRenderer loadStrokeTextureImages:selectableOverlay.polylineTextureImages];
+                     
+                     /* 修改overlay覆盖的顺序. */
+                     [self.mapView exchangeOverlayAtIndex:idx withOverlayAtIndex:self.mapView.overlays.count - 1];
+                     [self.mapView showOverlays:@[overlay] animated:YES];
                  }
-                 selectableOverlay.polylineStrokeColors = strokeColors;
-                 overlayRenderer.strokeColors = selectableOverlay.polylineStrokeColors;
+                 else
+                 {
+                     /* 设置选中状态. */
+                     selectableOverlay.selected = NO;
+                     
+                     /* 修改renderer选中颜色. */
+                     [overlayRenderer loadStrokeTextureImages:@[[UIImage imageNamed:@"custtexture_gray"]]];
+                 }
              }
              
-             [overlayRenderer glRender];
+             [polylineRenderer glRender];
          }
      }];
 }
@@ -333,6 +363,18 @@
     return [AMapNaviPoint locationWithLatitude:coordinate.latitude longitude:coordinate.longitude];
 }
 
+- (UIImage *)defaultTextureImageForStatus:(AMapNaviRouteStatus)status
+{
+    NSString *imageName = nil;
+    if (status == AMapNaviRouteStatusSmooth)            imageName = @"custtexture_green";
+    else if (status == AMapNaviRouteStatusSlow)         imageName = @"custtexture_slow";
+    else if (status == AMapNaviRouteStatusJam)          imageName = @"custtexture_bad";
+    else if (status == AMapNaviRouteStatusSeriousJam)   imageName = @"custtexture_serious";
+    else imageName = @"custtexture_no";
+    
+    return [UIImage imageNamed:imageName];
+}
+
 - (UIColor *)defaultColorForStatus:(AMapNaviRouteStatus)status
 {
     switch (status) {
@@ -350,6 +392,137 @@
 }
 
 - (void)addRoutePolylineWithRouteID:(NSInteger)routeID
+{
+    //用不同颜色表示不同的路况
+//    [self addRoutePolylineUseStrokeColorsWithRouteID:routeID];
+    
+    //用不同纹理表示不同的路况
+    [self addRoutePolylineUseTextureImageWithRouteID:routeID];
+}
+
+- (void)addRoutePolylineUseTextureImageWithRouteID:(NSInteger)routeID
+{
+    //必须选中路线后，才可以通过driveManager获取实时交通路况
+    if (![self.driveManager selectNaviRouteWithRouteID:routeID])
+    {
+        return;
+    }
+    
+    NSArray <AMapNaviPoint *> *oriCoordinateArray = [self.driveManager.naviRoute.routeCoordinates copy];
+    NSArray <AMapNaviTrafficStatus *> *trafficStatus = [self.driveManager getTrafficStatusesWithStartPosition:0 distance:(int)self.driveManager.naviRoute.routeLength];
+    
+    NSMutableArray <AMapNaviPoint *> *resultCoords = [[NSMutableArray alloc] init];
+    NSMutableArray <NSNumber *> *coordIndexes = [[NSMutableArray alloc] init];
+    NSMutableArray <UIImage *> *textureImages = [[NSMutableArray alloc] init];
+    [resultCoords addObject:[oriCoordinateArray objectAtIndex:0]];
+    
+    //依次计算每个路况的长度对应的polyline点的index
+    unsigned int i = 1;
+    NSInteger sumLength = 0;
+    NSInteger statusesIndex = 0;
+    NSInteger curTrafficLength = [[trafficStatus firstObject] length];
+    
+    for ( ; i < [oriCoordinateArray count]; i++)
+    {
+        double segDis = [self calcDistanceBetweenPoint:[oriCoordinateArray objectAtIndex:i-1]
+                                              andPoint:[oriCoordinateArray objectAtIndex:i]];
+        
+        //两点间插入路况改变的点
+        if (sumLength + segDis >= curTrafficLength)
+        {
+            if (sumLength + segDis == curTrafficLength)
+            {
+                [resultCoords addObject:[oriCoordinateArray objectAtIndex:i]];
+                [coordIndexes addObject:[NSNumber numberWithInteger:((int)[resultCoords count]-1)]];
+            }
+            else
+            {
+                double rate = (segDis==0 ? 0 : ((curTrafficLength - sumLength) / segDis));
+                AMapNaviPoint *extrnPoint = [self calcPointWithStartPoint:[oriCoordinateArray objectAtIndex:i-1]
+                                                                 endPoint:[oriCoordinateArray objectAtIndex:i]
+                                                                     rate:MAX(MIN(rate, 1.0), 0)];
+                if (extrnPoint)
+                {
+                    [resultCoords addObject:extrnPoint];
+                    [coordIndexes addObject:[NSNumber numberWithInteger:((int)[resultCoords count]-1)]];
+                    [resultCoords addObject:[oriCoordinateArray objectAtIndex:i]];
+                }
+                else
+                {
+                    [resultCoords addObject:[oriCoordinateArray objectAtIndex:i]];
+                    [coordIndexes addObject:[NSNumber numberWithInteger:((int)[resultCoords count]-1)]];
+                }
+            }
+            
+            //添加对应的strokeColors
+            [textureImages addObject:[self defaultTextureImageForStatus:[[trafficStatus objectAtIndex:statusesIndex] status]]];
+            
+            sumLength = sumLength + segDis - curTrafficLength;
+            
+            if (++statusesIndex >= [trafficStatus count])
+            {
+                break;
+            }
+            curTrafficLength = [[trafficStatus objectAtIndex:statusesIndex] length];
+        }
+        else
+        {
+            [resultCoords addObject:[oriCoordinateArray objectAtIndex:i]];
+            
+            sumLength += segDis;
+        }
+    }
+    
+    //将最后一个点对齐到路径终点
+    if (i < [oriCoordinateArray count])
+    {
+        while (i < [oriCoordinateArray count])
+        {
+            [resultCoords addObject:[oriCoordinateArray objectAtIndex:i]];
+            i++;
+        }
+        
+        [coordIndexes removeLastObject];
+        [coordIndexes addObject:[NSNumber numberWithInteger:((int)[resultCoords count]-1)]];
+    }
+    else
+    {
+        while (((int)[coordIndexes count])-1 >= (int)[trafficStatus count])
+        {
+            [coordIndexes removeLastObject];
+            [textureImages removeLastObject];
+        }
+        
+        [coordIndexes addObject:[NSNumber numberWithInteger:((int)[resultCoords count]-1)]];
+        //需要修改textureImages的最后一个与trafficStatus最后一个一致
+        [textureImages addObject:[self defaultTextureImageForStatus:[[trafficStatus lastObject] status]]];
+    }
+    
+    //添加Polyline
+    NSInteger coordCount = [resultCoords count];
+    CLLocationCoordinate2D *coordinates = (CLLocationCoordinate2D *)malloc(coordCount * sizeof(CLLocationCoordinate2D));
+    for (int k = 0; k < coordCount; k++)
+    {
+        AMapNaviPoint *aCoordinate = [resultCoords objectAtIndex:k];
+        coordinates[k] = CLLocationCoordinate2DMake(aCoordinate.latitude, aCoordinate.longitude);
+    }
+    
+    //创建SelectableTrafficOverlay
+    SelectableTrafficOverlay *polyline = [SelectableTrafficOverlay polylineWithCoordinates:coordinates count:coordCount drawStyleIndexes:coordIndexes];
+    polyline.routeID = routeID;
+    polyline.selected = NO;
+    polyline.polylineWidth = 20;
+    polyline.polylineTextureImages = textureImages;
+    
+    if (coordinates != NULL)
+    {
+        free(coordinates);
+    }
+    
+    [self.mapView addOverlay:polyline level:MAOverlayLevelAboveLabels];
+}
+
+- (void)addRoutePolylineUseStrokeColorsWithRouteID:(NSInteger)routeID
 {
     //必须选中路线后，才可以通过driveManager获取实时交通路况
     if (![self.driveManager selectNaviRouteWithRouteID:routeID])
@@ -648,6 +821,18 @@
             polylineRenderer.strokeColors = routeOverlay.polylineStrokeColors;
             polylineRenderer.gradient = NO;
             polylineRenderer.fillColor = [UIColor redColor];
+            
+            return polylineRenderer;
+        }
+        else if (routeOverlay.polylineTextureImages && routeOverlay.polylineTextureImages.count > 0)
+        {
+            MAMultiTexturePolylineRenderer *polylineRenderer = [[MAMultiTexturePolylineRenderer alloc] initWithMultiPolyline:routeOverlay];
+            
+            polylineRenderer.lineWidth = routeOverlay.polylineWidth;
+            polylineRenderer.lineJoinType = kMALineJoinRound;
+            
+            BOOL loadSucc = [polylineRenderer loadStrokeTextureImages:routeOverlay.polylineTextureImages];
+            if (!loadSucc) { /*NSLog(@"Load Overlay Texture Images Failed!");*/ }
             
             return polylineRenderer;
         }

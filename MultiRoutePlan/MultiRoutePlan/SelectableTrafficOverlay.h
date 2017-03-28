@@ -14,6 +14,8 @@
 
 @property (nonatomic, assign) BOOL selected;
 @property (nonatomic, assign) CGFloat polylineWidth;
-@property (nonatomic, strong) NSArray<UIColor *> *polylineStrokeColors;
+
+@property (nonatomic, copy) NSArray<UIColor *> *polylineStrokeColors;
+@property (nonatomic, copy) NSArray<UIImage *> *polylineTextureImages;
 
 @end
