@@ -741,6 +741,11 @@
     NSLog(@"onArrivedWayPoint:%d", wayPointIndex);
 }
 
+- (BOOL)driveManagerIsNaviSoundPlaying:(AMapNaviDriveManager *)driveManager
+{
+    return [[SpeechSynthesizer sharedSpeechSynthesizer] isSpeaking];
+}
+
 - (void)driveManager:(AMapNaviDriveManager *)driveManager playNaviSoundString:(NSString *)soundString soundStringType:(AMapNaviSoundType)soundStringType
 {
     NSLog(@"playNaviSoundString:{%ld:%@}", (long)soundStringType, soundString);

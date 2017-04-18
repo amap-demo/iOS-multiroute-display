@@ -41,6 +41,10 @@ final class SpeechSynthesizer: NSObject, AVSpeechSynthesizerDelegate {
         speechSynthesizer.speak(aUtterance)
     }
     
+    public func isSpeaking() -> Bool {
+        return speechSynthesizer.isSpeaking
+    }
+    
     public func stopSpeak() {
         speechSynthesizer.stopSpeaking(at: .immediate)
     }

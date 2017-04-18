@@ -51,6 +51,11 @@
     [self.speechSynthesizer setDelegate:self];
 }
 
+- (BOOL)isSpeaking
+{
+    return self.speechSynthesizer.isSpeaking;
+}
+
 - (void)speakString:(NSString *)string
 {
     if (self.speechSynthesizer)

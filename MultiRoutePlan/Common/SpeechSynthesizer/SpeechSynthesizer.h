@@ -18,6 +18,8 @@
 
 + (instancetype)sharedSpeechSynthesizer;
 
+- (BOOL)isSpeaking;
+
 - (void)speakString:(NSString *)string;
 
 - (void)stopSpeak;
