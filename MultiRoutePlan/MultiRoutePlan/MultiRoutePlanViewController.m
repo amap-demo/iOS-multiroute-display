@@ -245,7 +245,7 @@
                      selectableOverlay.selected = YES;
                      
                      /* 修改renderer选中颜色. */
-                     [overlayRenderer loadStrokeTextureImages:selectableOverlay.polylineTextureImages];
+                     overlayRenderer.strokeTextureImages = selectableOverlay.polylineTextureImages;
                      
                      /* 修改overlay覆盖的顺序. */
                      [self.mapView exchangeOverlayAtIndex:idx withOverlayAtIndex:self.mapView.overlays.count - 1];
@@ -257,7 +257,7 @@
                      selectableOverlay.selected = NO;
                      
                      /* 修改renderer选中颜色. */
-                     [overlayRenderer loadStrokeTextureImages:@[[UIImage imageNamed:@"custtexture_gray"]]];
+                     overlayRenderer.strokeTextureImages = @[[UIImage imageNamed:@"custtexture_gray"]];
                  }
              }
              
@@ -835,9 +835,7 @@
             
             polylineRenderer.lineWidth = routeOverlay.polylineWidth;
             polylineRenderer.lineJoinType = kMALineJoinRound;
-            
-            BOOL loadSucc = [polylineRenderer loadStrokeTextureImages:routeOverlay.polylineTextureImages];
-            if (!loadSucc) { /*NSLog(@"Load Overlay Texture Images Failed!");*/ }
+            polylineRenderer.strokeTextureImages = routeOverlay.polylineTextureImages;
             
             return polylineRenderer;
         }

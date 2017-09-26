@@ -194,7 +194,7 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
                         selectableOverlay.selected = true
                         
                         /* 修改renderer选中颜色. */
-                        overlayRenderer.loadStrokeTextureImages(selectableOverlay.polylineTextureImages)
+                        overlayRenderer.strokeTextureImages = selectableOverlay.polylineTextureImages
                         
                         /* 修改overlay覆盖的顺序. */
                         mapView.exchangeOverlay(at: UInt(index), withOverlayAt: UInt(mapView.overlays.count - 1))
@@ -206,7 +206,7 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
                         
                         /* 修改renderer选中颜色. */
                         let image = UIImage(named: "custtexture_gray")!
-                        overlayRenderer.loadStrokeTextureImages([image])
+                        overlayRenderer.strokeTextureImages = [image]
                     }
                 }
                 
@@ -755,9 +755,8 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
                 polylineRenderer?.lineWidth = routeOverlay.polylineWidth
                 polylineRenderer?.lineJoinType = kMALineJoinRound
                 
-                if (polylineRenderer?.loadStrokeTextureImages(routeOverlay.polylineTextureImages))! {
-//                    NSLog("Load Overlay Texture Images Failed!")
-                }
+                polylineRenderer?.strokeTextureImages = routeOverlay.polylineTextureImages
+                
                 
                 return polylineRenderer
             }
