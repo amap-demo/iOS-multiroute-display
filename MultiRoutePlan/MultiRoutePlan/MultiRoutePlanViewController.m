@@ -98,14 +98,10 @@
 
 - (void)initDriveManager
 {
-    if (self.driveManager == nil)
-    {
-        self.driveManager = [[AMapNaviDriveManager alloc] init];
-        [self.driveManager setDelegate:self];
-        
-        [self.driveManager setAllowsBackgroundLocationUpdates:YES];
-        [self.driveManager setPausesLocationUpdatesAutomatically:NO];
-    }
+    [[AMapNaviDriveManager sharedInstance] setDelegate:self];
+    
+    [[AMapNaviDriveManager sharedInstance]  setAllowsBackgroundLocationUpdates:YES];
+    [[AMapNaviDriveManager sharedInstance]  setPausesLocationUpdatesAutomatically:NO];
 }
 
 - (void)initAnnotations
@@ -130,7 +126,7 @@
 - (void)routePlanAction:(id)sender
 {
     //进行多路径规划
-    [self.driveManager calculateDriveRouteWithStartPoints:@[self.startPoint]
+    [[AMapNaviDriveManager sharedInstance]  calculateDriveRouteWithStartPoints:@[self.startPoint]
                                                 endPoints:@[self.endPoint]
                                                 wayPoints:nil
                                           drivingStrategy:[self.preferenceView strategyWithIsMultiple:YES]];
@@ -140,7 +136,7 @@
 
 - (void)showNaviRoutes
 {
-    if ([self.driveManager.naviRoutes count] <= 0)
+    if ([[AMapNaviDriveManager sharedInstance] .naviRoutes count] <= 0)
     {
         return;
     }
@@ -149,9 +145,9 @@
     NSMutableArray *allInfoModels = [[NSMutableArray alloc] init];
     NSDictionary *allTags = [self createRotueTagString];
     
-    for (NSNumber *aRouteID in [self.driveManager.naviRoutes allKeys])
+    for (NSNumber *aRouteID in [[AMapNaviDriveManager sharedInstance] .naviRoutes allKeys])
     {
-        AMapNaviRoute *aRoute = [[self.driveManager naviRoutes] objectForKey:aRouteID];
+        AMapNaviRoute *aRoute = [[[AMapNaviDriveManager sharedInstance]  naviRoutes] objectForKey:aRouteID];
         
         //添加带实时路况的Polyline
         [self addRoutePolylineWithRouteID:[aRouteID integerValue]];
@@ -177,7 +173,7 @@
 - (void)selectNaviRouteWithID:(NSInteger)routeID
 {
     //在开始导航前进行路径选择
-    if ([self.driveManager selectNaviRouteWithRouteID:routeID])
+    if ([[AMapNaviDriveManager sharedInstance]  selectNaviRouteWithRouteID:routeID])
     {
         [self selecteOverlayWithRouteID:routeID];
     }
@@ -271,7 +267,7 @@
 /* 创建路线标签 */
 - (NSDictionary *)createRotueTagString
 {
-    NSArray <NSNumber *> *allRouteIDs = [self.driveManager.naviRoutes allKeys];
+    NSArray <NSNumber *> *allRouteIDs = [[AMapNaviDriveManager sharedInstance].naviRoutes allKeys];
     AMapNaviDrivingStrategy strategy = [self.preferenceView strategyWithIsMultiple:YES];
     
     NSInteger minTime = NSIntegerMax;
@@ -279,7 +275,7 @@
     NSInteger minTrafficLightCount = NSIntegerMax;
     NSInteger minCost = NSIntegerMax;
     
-    for (AMapNaviRoute *aRoute in [self.driveManager.naviRoutes allValues])
+    for (AMapNaviRoute *aRoute in [[AMapNaviDriveManager sharedInstance].naviRoutes allValues])
     {
         if (aRoute.routeTime < minTime) minTime = aRoute.routeTime;
         
@@ -294,7 +290,7 @@
     for (int i = 0; i < allRouteIDs.count; i++)
     {
         NSNumber *aRouteID = [allRouteIDs objectAtIndex:i];
-        AMapNaviRoute *aRoute = [[self.driveManager naviRoutes] objectForKey:aRouteID];
+        AMapNaviRoute *aRoute = [[[AMapNaviDriveManager sharedInstance] naviRoutes] objectForKey:aRouteID];
         
         NSString *resultTag = [NSMutableString stringWithFormat:@"方案%d", i+1];
         if (aRoute.routeTrafficLightCount <= minTrafficLightCount)
@@ -403,13 +399,13 @@
 - (void)addRoutePolylineUseTextureImageWithRouteID:(NSInteger)routeID
 {
     //必须选中路线后，才可以通过driveManager获取实时交通路况
-    if (![self.driveManager selectNaviRouteWithRouteID:routeID])
+    if (![[AMapNaviDriveManager sharedInstance]  selectNaviRouteWithRouteID:routeID])
     {
         return;
     }
     
-    NSArray <AMapNaviPoint *> *oriCoordinateArray = [self.driveManager.naviRoute.routeCoordinates copy];
-    NSArray <AMapNaviTrafficStatus *> *trafficStatus = [self.driveManager getTrafficStatusesWithStartPosition:0 distance:(int)self.driveManager.naviRoute.routeLength];
+    NSArray <AMapNaviPoint *> *oriCoordinateArray = [[AMapNaviDriveManager sharedInstance] .naviRoute.routeCoordinates copy];
+    NSArray <AMapNaviTrafficStatus *> *trafficStatus = [[AMapNaviDriveManager sharedInstance]  getTrafficStatusesWithStartPosition:0 distance:(int)[AMapNaviDriveManager sharedInstance] .naviRoute.routeLength];
     
     NSMutableArray <AMapNaviPoint *> *resultCoords = [[NSMutableArray alloc] init];
     NSMutableArray <NSNumber *> *coordIndexes = [[NSMutableArray alloc] init];
@@ -525,13 +521,13 @@
 - (void)addRoutePolylineUseStrokeColorsWithRouteID:(NSInteger)routeID
 {
     //必须选中路线后，才可以通过driveManager获取实时交通路况
-    if (![self.driveManager selectNaviRouteWithRouteID:routeID])
+    if (![[AMapNaviDriveManager sharedInstance]  selectNaviRouteWithRouteID:routeID])
     {
         return;
     }
     
-    NSArray <AMapNaviPoint *> *oriCoordinateArray = [self.driveManager.naviRoute.routeCoordinates copy];
-    NSArray <AMapNaviTrafficStatus *> *trafficStatus = [self.driveManager getTrafficStatusesWithStartPosition:0 distance:(int)self.driveManager.naviRoute.routeLength];
+    NSArray <AMapNaviPoint *> *oriCoordinateArray = [[AMapNaviDriveManager sharedInstance] .naviRoute.routeCoordinates copy];
+    NSArray <AMapNaviTrafficStatus *> *trafficStatus = [[AMapNaviDriveManager sharedInstance]  getTrafficStatusesWithStartPosition:0 distance:(int)[AMapNaviDriveManager sharedInstance] .naviRoute.routeLength];
     
     NSMutableArray <AMapNaviPoint *> *resultCoords = [[NSMutableArray alloc] init];
     NSMutableArray <NSNumber *> *coordIndexes = [[NSMutableArray alloc] init];
@@ -695,10 +691,10 @@
     [driveVC setDelegate:self];
     
     //将driveView添加为导航数据的Representative，使其可以接收到导航诱导数据
-    [self.driveManager addDataRepresentative:driveVC.driveView];
+    [[AMapNaviDriveManager sharedInstance]  addDataRepresentative:driveVC.driveView];
     
     [self.navigationController pushViewController:driveVC animated:NO];
-    [self.driveManager startEmulatorNavi];
+    [[AMapNaviDriveManager sharedInstance]  startEmulatorNavi];
 }
 
 #pragma mark - AMapNaviDriveManager Delegate
@@ -768,7 +764,7 @@
 - (void)driveNaviViewCloseButtonClicked
 {
     //开始导航后不再允许选择路径，所以停止导航
-    [self.driveManager stopNavi];
+    [[AMapNaviDriveManager sharedInstance]  stopNavi];
     
     //停止语音
     [[SpeechSynthesizer sharedSpeechSynthesizer] stopSpeak];

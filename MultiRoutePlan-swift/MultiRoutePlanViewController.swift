@@ -14,7 +14,6 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
     let bottomInfoViewHeight: CGFloat = 170.0
     
     var mapView: MAMapView!
-    var driveManager: AMapNaviDriveManager!
     
     let startPoint = AMapNaviPoint.location(withLatitude: 39.993135, longitude: 116.474175)!
     let endPoint = AMapNaviPoint.location(withLatitude: 39.908791, longitude: 116.321257)!
@@ -63,11 +62,10 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
     }
     
     func initDriveManager() {
-        driveManager = AMapNaviDriveManager()
-        driveManager.delegate = self
+        AMapNaviDriveManager.sharedInstance().delegate = self
         
-        driveManager.allowsBackgroundLocationUpdates = true
-        driveManager.pausesLocationUpdatesAutomatically = false
+        AMapNaviDriveManager.sharedInstance().allowsBackgroundLocationUpdates = true
+        AMapNaviDriveManager.sharedInstance().pausesLocationUpdatesAutomatically = false
     }
     
     func initAnnotations() {
@@ -90,7 +88,7 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
     
     func routePlanAction(sender: UIButton?) {
         //进行多路径规划
-        driveManager.calculateDriveRoute(withStart: [startPoint],
+        AMapNaviDriveManager.sharedInstance().calculateDriveRoute(withStart: [startPoint],
                                          end: [endPoint],
                                          wayPoints: nil,
                                          drivingStrategy: preferenceView.strategy(withIsMultiple: true))
@@ -100,7 +98,7 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
     
     func showNaviRoutes() {
         
-        guard let allRoutes = driveManager.naviRoutes else {
+        guard let allRoutes = AMapNaviDriveManager.sharedInstance().naviRoutes else {
             return
         }
         
@@ -134,7 +132,7 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
     
     func selectNaviRouteWithID(routeID: Int) {
         //在开始导航前进行路径选择
-        if driveManager.selectNaviRoute(withRouteID: routeID) {
+        if AMapNaviDriveManager.sharedInstance().selectNaviRoute(withRouteID: routeID) {
             selecteOverlayWithRouteID(routeID: routeID)
         }
         else {
@@ -220,7 +218,7 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
     /* 创建路线标签 */
     func createRouteTagString() -> [NSNumber: String]? {
         
-        guard let allRoutes = driveManager.naviRoutes else {
+        guard let allRoutes = AMapNaviDriveManager.sharedInstance().naviRoutes else {
             return nil
         }
         
@@ -357,11 +355,11 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
     
     func addRoutePolylineUseTextureImagesWithRouteID(_ routeID: Int) {
         //必须选中路线后，才可以通过driveManager获取实时交通路况
-        if !driveManager.selectNaviRoute(withRouteID: routeID) {
+        if !AMapNaviDriveManager.sharedInstance().selectNaviRoute(withRouteID: routeID) {
             return
         }
         
-        guard let aRoute = driveManager.naviRoute else {
+        guard let aRoute = AMapNaviDriveManager.sharedInstance().naviRoute else {
             return
         }
         
@@ -370,7 +368,7 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
             return
         }
         //获取路径的交通状况信息
-        guard let trafficStatus = driveManager.getTrafficStatuses(withStartPosition: 0, distance: Int32(aRoute.routeLength)) else {
+        guard let trafficStatus = AMapNaviDriveManager.sharedInstance().getTrafficStatuses(withStartPosition: 0, distance: Int32(aRoute.routeLength)) else {
             return
         }
         
@@ -471,11 +469,11 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
     
     func addRoutePolylineUseStrokeColorsWithRouteID(_ routeID: Int) {
         //必须选中路线后，才可以通过driveManager获取实时交通路况
-        if !driveManager.selectNaviRoute(withRouteID: routeID) {
+        if !AMapNaviDriveManager.sharedInstance().selectNaviRoute(withRouteID: routeID) {
             return
         }
         
-        guard let aRoute = driveManager.naviRoute else {
+        guard let aRoute = AMapNaviDriveManager.sharedInstance().naviRoute else {
             return
         }
         
@@ -484,7 +482,7 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
             return
         }
         //获取路径的交通状况信息
-        guard let trafficStatus = driveManager.getTrafficStatuses(withStartPosition: 0, distance: Int32(aRoute.routeLength)) else {
+        guard let trafficStatus = AMapNaviDriveManager.sharedInstance().getTrafficStatuses(withStartPosition: 0, distance: Int32(aRoute.routeLength)) else {
             return
         }
         
@@ -632,10 +630,10 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
         driveVC.delegate = self
         
         //将driveView添加为导航数据的Representative，使其可以接收到导航诱导数据
-        driveManager.addDataRepresentative(driveVC.driveView)
+        AMapNaviDriveManager.sharedInstance().addDataRepresentative(driveVC.driveView)
         
         _ = navigationController?.pushViewController(driveVC, animated: false)
-        driveManager.startEmulatorNavi()
+        AMapNaviDriveManager.sharedInstance().startEmulatorNavi()
     }
     
     //MARK: - AMapNaviDriveManager Delegate
@@ -695,7 +693,7 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
     
     func driveNaviViewCloseButtonClicked() {
         //开始导航后不再允许选择路径，所以停止导航
-        driveManager.stopNavi()
+        AMapNaviDriveManager.sharedInstance().stopNavi()
         
         //停止语音
         SpeechSynthesizer.Shared.stopSpeak()

@@ -14,6 +14,4 @@
 
 @property (nonatomic, strong) MAMapView *mapView;
 
-@property (nonatomic, strong) AMapNaviDriveManager *driveManager;
-
 @end
