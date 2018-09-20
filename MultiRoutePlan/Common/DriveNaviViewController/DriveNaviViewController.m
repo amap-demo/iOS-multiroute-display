@@ -69,19 +69,6 @@
     }
 }
 
-- (void)viewWillLayoutSubviews
-{
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
-    {
-        [self.driveView setIsLandscape:NO];
-    }
-    else if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-    {
-        [self.driveView setIsLandscape:YES];
-    }
-}
-
 - (BOOL)prefersStatusBarHidden
 {
     return YES;

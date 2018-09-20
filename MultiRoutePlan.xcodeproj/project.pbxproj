@@ -361,7 +361,6 @@
 				3A042CA81DCAE56400BB9641 /* Sources */,
 				3A042CA91DCAE56400BB9641 /* Frameworks */,
 				3A042CAA1DCAE56400BB9641 /* Resources */,
-				7F69C7E3E6527F2BE24250AF /* [CP] Embed Pods Frameworks */,
 				8CF27B99440558C2110BC8D7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -381,7 +380,6 @@
 				3A74E7D11E23777100BDC2D9 /* Sources */,
 				3A74E7D21E23777100BDC2D9 /* Frameworks */,
 				3A74E7D31E23777100BDC2D9 /* Resources */,
-				6D373F9628782DB6F526008D /* [CP] Embed Pods Frameworks */,
 				D448F9FBB5403072A9019A57 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -528,36 +526,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6D373F9628782DB6F526008D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MultiRoutePlan-swift/Pods-MultiRoutePlan-swift-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7F69C7E3E6527F2BE24250AF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MultiRoutePlan/Pods-MultiRoutePlan-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8CF27B99440558C2110BC8D7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -570,7 +538,8 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMapNavi.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -607,7 +576,8 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMapNavi.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
