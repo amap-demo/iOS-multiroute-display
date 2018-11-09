@@ -256,8 +256,6 @@
                      overlayRenderer.strokeTextureImages = @[[UIImage imageNamed:@"custtexture_gray"]];
                  }
              }
-             
-             [polylineRenderer glRender];
          }
      }];
 }
