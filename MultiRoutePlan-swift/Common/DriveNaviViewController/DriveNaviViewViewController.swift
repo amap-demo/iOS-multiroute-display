@@ -37,17 +37,6 @@ class DriveNaviViewViewController: UIViewController, AMapNaviDriveViewDelegate, 
         navigationController?.isToolbarHidden = true
     }
     
-    override func viewWillLayoutSubviews() {
-        
-        let interfaceOrientation = UIApplication.shared.statusBarOrientation
-        if UIInterfaceOrientationIsPortrait(interfaceOrientation) {
-            driveView.isLandscape = false
-        }
-        else if UIInterfaceOrientationIsLandscape(interfaceOrientation) {
-            driveView.isLandscape = true
-        }
-    }
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
