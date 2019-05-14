@@ -86,7 +86,7 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
     
     //MARK: - Button Action
     
-    func routePlanAction(sender: UIButton?) {
+    @objc func routePlanAction(sender: UIButton?) {
         //进行多路径规划
         AMapNaviDriveManager.sharedInstance().calculateDriveRoute(withStart: [startPoint],
                                          end: [endPoint],
@@ -315,15 +315,15 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
     func defaultColorForStatus(_ status: AMapNaviRouteStatus) -> UIColor {
         switch status {
         case .smooth:
-            return UIColor(colorLiteralRed: 65/255.0, green: 223/255.0, blue: 16/255.0, alpha: 1)
+            return UIColor.init(red: 65/255.0, green: 223/255.0, blue: 16/255.0, alpha: 1);
         case .slow:
             return UIColor.yellow
         case .jam:
             return UIColor.red
         case .seriousJam:
-            return UIColor(colorLiteralRed: 160/255.0, green: 8/255.0, blue: 8/255.0, alpha: 1)
+            return UIColor.init(red: 160/255.0, green: 8/255.0, blue: 8/255.0, alpha: 1);
         default:
-            return UIColor(colorLiteralRed: 26/255.0, green: 166/255.0, blue: 239/255.0, alpha: 1)
+            return UIColor.init(red: 26/255.0, green: 166/255.0, blue: 239/255.0, alpha: 1);
         }
     }
     
