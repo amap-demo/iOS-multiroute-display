@@ -651,7 +651,11 @@
     [routeBtn addTarget:self action:@selector(routePlanAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:routeBtn];
     
-    self.bottomInfoView = [[BottomInfoView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 64 - kBottomInfoViewHeight, CGRectGetWidth(self.view.bounds), kBottomInfoViewHeight)];
+    float extraHeight = 0;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 11.0 && [[UIApplication sharedApplication] statusBarFrame].size.height > 20.1 ) {
+        extraHeight = 34;
+    }
+    self.bottomInfoView = [[BottomInfoView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 64 - kBottomInfoViewHeight - extraHeight, CGRectGetWidth(self.view.bounds), kBottomInfoViewHeight)];
     self.bottomInfoView.delegate = self;
     [self.view addSubview:self.bottomInfoView];
     
