@@ -1,9 +1,9 @@
 PODS:
-  - AMap3DMap (6.4.0):
+  - AMap3DMap (6.8.1):
     - AMapFoundation (~> 1.5)
-  - AMapFoundation (1.5.4)
-  - AMapNavi (6.3.0):
-    - AMap3DMap (~> 6.4)
+  - AMapFoundation (1.5.6)
+  - AMapNavi (6.7.0):
+    - AMap3DMap (~> 6.7)
     - AMapFoundation (~> 1.5)
 
 DEPENDENCIES:
@@ -16,10 +16,10 @@ SPEC REPOS:
     - AMapNavi
 
 SPEC CHECKSUMS:
-  AMap3DMap: ebfb4e202c2bee9c3a6c296264e29f12436b6379
-  AMapFoundation: bff8688722e886feda4edd77f1443746ddd7e2e2
-  AMapNavi: 03c899c5a0d76e1222dc4c317d2a6a9b72449cff
+  AMap3DMap: 9fa4ec6ab230bfbd3f0c0834f757fbd7038efe53
+  AMapFoundation: 20fce2a12cd152e1092afdd04379cdac21932185
+  AMapNavi: 89e30fee35c01a00e45e846fa272f60724d06d0c
 
-PODFILE CHECKSUM: f711e9fe486d51a77db4c2190ecab71f19390493
+PODFILE CHECKSUM: 3197fba035e582cf0ca1a4bb9593648a536cc5f4
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1
