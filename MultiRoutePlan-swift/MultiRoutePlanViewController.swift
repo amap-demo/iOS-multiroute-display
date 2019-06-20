@@ -383,7 +383,7 @@ class MultiRoutePlanViewController: UIViewController, MAMapViewDelegate, AMapNav
         var statusesIndex = 0
         var curTrafficLength = (trafficStatus.first?.length)!
         
-        for index in 1..<(oriCoordinateArray.count-1) {
+        for index in 1..<(oriCoordinateArray.count) {
             i = index
             
             let segDis = Int(calcDistanceBetween(oriCoordinateArray[i-1], and: oriCoordinateArray[i]))
